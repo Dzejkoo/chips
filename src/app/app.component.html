@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <h2 class="title">Twoje dane</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="submit()">
+        <section class="contact">
+          <h3 class="subtitle">Dane kontaktowe</h3>
+          <div class="form-group" [ngClass]="displayErorrCss('name')">
+            <div class="label-own">
+              <label for="name">Imię</label>
+              <span class="label-own__star" *ngIf="isValidField('name')">*</span>
+            </div>
+            <input formControlName="name" class="form-control" type="text" name="name" id="name">
+            <app-error-field [textValid]="isValidField('name')" errorName="Pole jest wymagane"></app-error-field>
+          </div>
+          <div class="form-group" [ngClass]="displayErorrCss('surname')">
+            <div class="label-own">
+              <label for="surname">Nazwisko</label>
+              <span class="label-own__star" *ngIf="isValidField('surname')">*</span>
+            </div>
+            <input formControlName="surname" class="form-control" type="text" name="surname" id="surname">
+            <app-error-field [textValid]="isValidField('surname')" errorName="Pole jest wymagane"></app-error-field>
+          </div>
+          <div class="form-group" [ngClass]="displayErorrCss('tel') ">
+            <div class="label-own">
+              <label for="tel">Numer telefonu</label>
+              <span class="label-own__star" *ngIf="isValidField('tel')">*</span>
+            </div>
+            <input formControlName="tel" class="form-control" type="tel" name="tel" id="tel">
+            <app-error-field [textValid]="isValidField('tel') && signupForm.get('tel').value === ''"
+              errorName="Pole jest wymagane"></app-error-field>
+            <app-error-field [telValid]="isValidTel('tel')" errorName="Niepoprawny numer telefonu"></app-error-field>
+          </div>
+          <div class="form-group" [ngClass]="displayErorrCss('email') ">
+            <div class="label-own">
+              <label for="email">Adres e-mail</label>
+              <span class="label-own__star" *ngIf="isValidField('email')">*</span>
+            </div>
+            <input formControlName="email" class="form-control" type="email" name="email" id="email">
+            <app-error-field [textValid]="isValidField('email')" errorName="Pole jest wymagane"></app-error-field>
+          </div>
+        </section>
+        <button class="btn btn-primary" [disabled]="!signupForm.valid" type=" submit">Wyślij</button>
+      </form>
+    </div>
+  </div>
+</div>
